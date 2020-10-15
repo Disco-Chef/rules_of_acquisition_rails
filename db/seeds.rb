@@ -1,7 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+Rule.destroy_all
+
+base_url = "http://rulesofacquisitionnode.herokuapp.com/api/v1/rules/"
+
+(1..286).to_a.each do |counter|
+  base_url
+  rule_json = JSON.parse(RestClient.post(base_url, {"rule_number" => counter.to_s}.to_json))
+  p Rule.create!(rule_number: rule_json["data"]["rule_number"].to_i, scripture: rule_json["data"]["scripture"])
+end
