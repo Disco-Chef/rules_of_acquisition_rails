@@ -9,7 +9,7 @@ class Api::V1::RulesController < Api::V1::BaseController
   end
 
   def random
-    @rule = Rule.sample
+    @rule = Rule.all.sample
   end
 
   private
